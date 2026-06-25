@@ -22,6 +22,22 @@ namespace
     }
   }
 
+  bool parseId(const std::string &line, size_t &position, size_t &id)
+  {
+    if ((position >= line.size()) || !isDigit(line[position]))
+    {
+      return false;
+    }
+
+    id = 0;
+    while ((position < line.size()) && isDigit(line[position]))
+    {
+      id = id * 10 + static_cast< size_t >(line[position] - '0');
+      ++position;
+    }
+    return true;
+  }
+
    bool hasNoSpace(const std::string &line, size_t position)
   {
     while (position < line.size())
