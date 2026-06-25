@@ -46,3 +46,26 @@ void studilova::destroyPersonArray(PersonArray &array)
   array.size_ = 0;
   array.capacity_ = 0;
 }
+
+void studilova::appendPerson(PersonArray &array, const Person &person)
+{
+  if (array.size_ == array.capacity_)
+  {
+    reservePersonArray(array, getNextCapacity(array.capacity_));
+  }
+
+  array.data_[array.size_] = person;
+  ++array.size_;
+}
+
+bool studilova::containsPersonId(const PersonArray &array, std::size_t id)
+{
+  for (std::size_t i = 0; i < array.size_; ++i)
+  {
+    if (array.data_[i].id_ == id)
+    {
+      return true;
+    }
+  }
+  return false;
+}

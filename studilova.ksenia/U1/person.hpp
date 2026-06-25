@@ -21,6 +21,8 @@ namespace studilova
 
   void initPersonArray(PersonArray &array);
   void destroyPersonArray(PersonArray &array);
+  void appendPerson(PersonArray &array, const Person &person);
+  bool containsPersonId(const PersonArray &array, std::size_t id);
 }
 
 #endif
