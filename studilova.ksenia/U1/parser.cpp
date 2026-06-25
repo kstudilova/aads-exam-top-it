@@ -53,4 +53,37 @@ namespace
 }
 
 bool studilova::parsePersonLine(const std::string &line, Person &person)
-{}
+{
+  size_t position = 0;
+  size_t id = 0;
+
+  skipSpaces(line, position);
+
+  if (!parseId(line, position, id))
+  {
+    return false;
+  }
+
+  if ((position >= line.size()) || !isSpace(line[position]))
+  {
+    return false;
+  }
+
+  skipSpaces(line, position);
+
+  if (!hasNoSpace(line, position))
+  {
+    return false;
+  }
+
+  person.id_ = id;
+  person.info_.clear();
+
+  while (position < line.size())
+  {
+    person.info_ += line[position];
+    ++position;
+  }
+
+  return true;
+}
