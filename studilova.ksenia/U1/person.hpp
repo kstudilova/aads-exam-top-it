@@ -8,16 +8,19 @@ namespace studilova
 {
   struct Person
   {
-    size_t id;
-    std::string info;
+    size_t id_;
+    std::string info_;
   };
 
   struct PersonArray
   {
-    Person *data;
-    size_t size;
-    size_t capacity;
+    Person* data_;
+    size_t size_;
+    size_t capacity_;
   };
+
+  void initPersonArray(PersonArray &array);
+  void destroyPersonArray(PersonArray &array);
 }
 
 #endif
