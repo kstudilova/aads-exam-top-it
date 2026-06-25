@@ -21,6 +21,7 @@ namespace studilova
 
   void initMeetArray(MeetArray &array);
   void destroyMeetArray(MeetArray &array);
+  void appendMeet(MeetArray &array, const Meet &meet);
 }
 
 #endif
