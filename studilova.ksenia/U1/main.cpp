@@ -1,10 +1,26 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cctype>
 
 #include "args.hpp"
 #include "parser.hpp"
 #include "person.hpp"
+
+namespace
+{
+  bool isEmptyLine(const std::string &line)
+  {
+    for (std::size_t i = 0; i < line.size(); ++i)
+    {
+      if (!std::isspace(static_cast< unsigned char >(line[i])))
+      {
+        return false;
+      }
+    }
+    return true;
+  }
+}
 
 int main(int argc, char *argv[])
 {
@@ -49,6 +65,11 @@ int main(int argc, char *argv[])
 
   while (std::getline(*input, line))
   {
+    if (isEmptyLine(line))
+    {
+      continue;
+    }
+
     studilova::Person person;
 
     if (studilova::parsePersonLine(line, person) && !studilova::containsPersonId(persons, person.id_))
