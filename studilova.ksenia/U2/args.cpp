@@ -32,3 +32,62 @@ namespace
     return result;
   }
 }
+
+studilova::Args studilova::parseArgs(int argc, char *argv[])
+{
+  Args args{"", "", false, false, true};
+
+  if ((argc - 1) > 2)
+  {
+    args.valid_ = false;
+    return args;
+  }
+
+  const std::string inputPrefix = "in:";
+  const std::string dataPrefix = "data:";
+
+  for (int i = 1; i < argc; ++i)
+  {
+    const std::string argument = argv[i];
+
+    if (hasPrefix(argument, inputPrefix))
+    {
+      if (args.hasInput_)
+      {
+        args.valid_ = false;
+        return args;
+      }
+
+      args.inputFile_ = removePrefix(argument, inputPrefix);
+      args.hasInput_ = true;
+    }
+    else if (hasPrefix(argument, dataPrefix))
+    {
+      if (args.hasData_)
+      {
+        args.valid_ = false;
+        return args;
+      }
+
+      args.dataFile_ = removePrefix(argument, dataPrefix);
+      args.hasData_ = true;
+    }
+    else
+    {
+      args.valid_ = false;
+      return args;
+    }
+  }
+
+  if (!args.hasData_ || args.dataFile_.empty())
+  {
+    args.valid_ = false;
+  }
+
+  if (args.hasInput_ && args.inputFile_.empty())
+  {
+    args.valid_ = false;
+  }
+
+  return args;
+}
